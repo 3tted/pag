@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight, Check, MapPin, MessageCircle } from "lucide-react";
-import logoAsset from "@/assets/vyrox-nutrition-logo.png.asset.json";
+import logo from "@/assets/vyrox-nutrition-logo.png";
 import heroImage from "@/assets/vyrox-hero.jpg";
 import { getCategories } from "@/lib/categories";
 
@@ -53,7 +53,7 @@ function Index() {
             Nutrición para tu siguiente nivel
           </p>
           <a href="#inicio" aria-label="Ir al inicio" className="mx-auto md:absolute md:left-1/2 md:-translate-x-1/2">
-            <img src={logoAsset.url} alt="VYROX Nutrition" className="h-20 w-auto object-contain md:h-24" />
+            <img src={logo} alt="VYROX Nutrition" className="h-20 w-auto object-contain md:h-24" />
           </a>
           <a
             href={whatsappUrl}
@@ -238,7 +238,7 @@ function Index() {
 
       <footer className="border-t border-border bg-background">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-5 px-5 py-8 text-center md:flex-row md:px-10 md:text-left">
-          <img src={logoAsset.url} alt="VYROX Nutrition" loading="lazy" className="h-14 w-auto object-contain" />
+          <img src={logo} alt="VYROX Nutrition" loading="lazy" className="h-14 w-auto object-contain" />
           <p className="text-xs text-muted-foreground">© 2026 VYROX Nutrition. Todos los derechos reservados.</p>
         </div>
       </footer>
