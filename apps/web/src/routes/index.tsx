@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight, Check, MapPin, MessageCircle } from "lucide-react";
 import logoAsset from "@/assets/vyrox-nutrition-logo.png.asset.json";
 import heroImage from "@/assets/vyrox-hero.jpg";
+import { getCategories } from "@/lib/categories";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -21,29 +22,12 @@ export const Route = createFileRoute("/")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
+  loader: () => getCategories(),
   component: Index,
 });
 
 const whatsappUrl =
   "https://wa.me/526561234567?text=Hola%20VYROX%20Nutrition%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20suplementos.";
-
-const categories = [
-  {
-    number: "01",
-    name: "Proteínas",
-    copy: "Opciones para complementar tu alimentación y acompañar tu recuperación.",
-  },
-  {
-    number: "02",
-    name: "Rendimiento",
-    copy: "Suplementos pensados para tus sesiones de entrenamiento y objetivos diarios.",
-  },
-  {
-    number: "03",
-    name: "Bienestar",
-    copy: "Vitaminas y complementos para integrar a una rutina activa y equilibrada.",
-  },
-];
 
 const coverage = [
   { city: "Chihuahua", meta: "Norte del país", x: "20%", y: "22%" },
@@ -60,6 +44,7 @@ function WhatsAppIcon({ className = "size-5" }: { className?: string }) {
 }
 
 function Index() {
+  const categories = Route.useLoaderData();
   return (
     <main className="min-h-screen overflow-hidden bg-background text-foreground">
       <header className="bg-background">
@@ -132,8 +117,8 @@ function Index() {
           </div>
           <div className="grid md:grid-cols-3">
             {categories.map((category) => (
-              <article key={category.number} className="group border-b border-border py-10 md:border-r md:px-8 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
-                <span className="text-xs font-bold text-primary">{category.number}</span>
+              <article key={category.position} className="group border-b border-border py-10 md:border-r md:px-8 md:first:pl-0 md:last:border-r-0 md:last:pr-0">
+                <span className="text-xs font-bold text-primary">{String(category.position).padStart(2, "0")}</span>
                 <h3 className="mt-12 font-display text-3xl uppercase transition-colors group-hover:text-primary">{category.name}</h3>
                 <p className="mt-4 max-w-sm leading-relaxed text-muted-foreground">{category.copy}</p>
                 <a

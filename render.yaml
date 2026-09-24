@@ -1,0 +1,31 @@
+# Render Blueprint — https://render.com/docs/blueprint-spec
+# Deploys apps/web as a Node web service from this GitHub monorepo.
+services:
+  - type: web
+    name: vyrox-web
+    runtime: node
+    plan: free
+    region: oregon
+    branch: main
+    autoDeployTrigger: commit
+    buildCommand: bun install --frozen-lockfile && bun run build:render
+    startCommand: bun run start
+    healthCheckPath: /api/health
+    # Only redeploy when the web app, shared packages, or root config change.
+    buildFilter:
+      paths:
+        - apps/web/**
+        - packages/**
+        - package.json
+        - bun.lock
+        - bunfig.toml
+        - render.yaml
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: BUN_VERSION
+        value: "1.4.2"
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false

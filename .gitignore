@@ -33,3 +33,12 @@ dist-ssr
 tsconfig.tsbuildinfo
 .git.lovable-backup
 .workspace/
+
+# Env files
+.env
+.env.*
+!.env.example
+
+# Supabase CLI
+supabase/.temp/
+supabase/.branches/

@@ -12,4 +12,12 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  vite: {
+    resolve: {
+      // @supabase/* import tslib; its "node" entry wraps the CJS build, which
+      // breaks when bundled for SSR ("Cannot destructure '__extends'"). Use the
+      // pure-ESM build instead.
+      alias: [{ find: /^tslib$/, replacement: "tslib/tslib.es6.mjs" }],
+    },
+  },
 });
